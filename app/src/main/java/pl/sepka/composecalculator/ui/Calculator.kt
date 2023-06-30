@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -23,24 +24,26 @@ import pl.sepka.composecalculator.CalculatorAction
 import pl.sepka.composecalculator.CalculatorOperation
 import pl.sepka.composecalculator.CalculatorState
 import pl.sepka.composecalculator.ui.theme.LightGrey
+import pl.sepka.composecalculator.ui.theme.MediumGray
 import pl.sepka.composecalculator.ui.theme.Orange
 
 @Composable
 fun Calculator(
+    modifier: Modifier = Modifier,
     state: CalculatorState,
     buttonSpacing: Dp = 8.dp,
-    modifier: Modifier = Modifier,
     onAction: (CalculatorAction) -> Unit
 ) {
     Box(modifier = Modifier) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .background(MediumGray)
                 .align(Alignment.BottomCenter),
             verticalArrangement = Arrangement.spacedBy(buttonSpacing)
         ) {
             Text(
-                text = state.number1 + (state.operation ?: "") + state.number2,
+                text = state.number1 + (state.operation?.symbol ?: "") + state.number2,
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
